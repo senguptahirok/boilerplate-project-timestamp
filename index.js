@@ -6,6 +6,7 @@ var express = require('express');
 var app = express();
 
 app.get('/api/:date',function(req,res,next){
+  console.log('date = ' + req.params.date);
   req.time = new Date(req.params.date).toString();
   console.log('current time = ' + req.time);
   next();},function(req,res){
