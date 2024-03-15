@@ -24,6 +24,10 @@ app.get('/api',function(req,res){
   res.send({time: req.time});
 })
 
+app.get('/api/:user_date',function(req,res){
+  req.time = new Date(req.params.user_date).toString();
+  res.send({time: req.time});
+})
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
