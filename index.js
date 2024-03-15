@@ -21,12 +21,15 @@ app.get('/api',function(req,res,next){
 */
 app.get('/api',function(req,res){
   req.time = new Date().toString();
-  res.send({time: req.time});
+  let reqTime = req.time;
+  let unixTime = reqTime.getTime();
+  res.send({'unix': unixTime,'utc': req.time});
 })
 
 app.get('/api/:user_date',function(req,res){
   req.time = new Date(req.params.user_date).toString();
-  let unixTime = req.time.getTime();
+  let reqTime = req.time;
+  let unixTime = reqTime.getTime();
   res.send({'unix':unixTime,'utc': req.time});
 })
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
