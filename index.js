@@ -4,20 +4,25 @@
 // init project
 var express = require('express');
 var app = express();
-
+/*
 app.get('/api',function(req,res,next){
   req.time = new Date().toString();
   next();},function(req,res){
     res.send({time: req.time});
   });
 
-app.get('/api/:date',function(req,res,next){
+  app.get('/api/:date',function(req,res,next){
   console.log('date = ' + req.params.date);
   req.time = new Date(req.params.date).toString();
   console.log('current time = ' + req.time);
   next();},function(req,res){
     res.send ({time: req.time});
   });
+*/
+app.get('/api',function(req,res){
+  req.time = new Date().toString();
+  res.send({time: req.time});
+})
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
