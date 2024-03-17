@@ -20,17 +20,13 @@ app.get('/api',function(req,res,next){
   });
 */
 app.get('/api',function(req,res){
-  req.time = new Date().toString();
-  let reqTime = req.time;
-  let unixTime = reqTime.getTime();
-  res.send({'unix': unixTime,'utc': req.time});
+  req.time = new Date().toUTCString();
+  res.send({'utc': req.time});
 })
 
 app.get('/api/:user_date',function(req,res){
-  req.time = new Date(req.params.user_date).toString();
-  let reqTime = req.time;
-  let unixTime = reqTime.getTime();
-  res.send({'unix':unixTime,'utc': req.time});
+  req.time = new Date(req.params.user_date).toUTCString();
+  res.send({'utc': req.time});
 })
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
