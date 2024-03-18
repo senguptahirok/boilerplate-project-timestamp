@@ -30,6 +30,11 @@ app.get('/api/:user_date',function(req,res){
   let unixTime = new Date().getTime(req.param.user_date);
   res.send({"unix": unixTime, "utc": req.time});
 })
+
+app.get('/api/:user_unix_ts',function(req,res){
+  req.time = new Date(req.params.user_unix_ts).toUTCString();
+  res.send({"unix": req.params.user_unix_ts, "utc": req.time});
+})
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
