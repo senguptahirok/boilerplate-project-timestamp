@@ -32,7 +32,7 @@ app.get('/api/:user_date',function(req,res){
 })
 
 app.get('/api/:user_unix_ts',function(req,res){
-  req.time = new Date(req.params.user_unix_ts * 1e3).toUTCString();
+  req.time = new Date(req.params.user_unix_ts * 1e3).toLocaleString();
   res.send({"unix": req.params.user_unix_ts, "utc": req.time});
 })
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
