@@ -24,13 +24,13 @@ app.get('/api',function(req,res){
   let unixTime = new Date().getTime(req.time);
   res.send({"unix": unixTime, "utc": req.time});
 })
-
+/*
 app.get('/api/:user_date',function(req,res){
   req.time = new Date(req.params.user_date).toUTCString();
   let unixTime = new Date().getTime(req.param.user_date);
   res.send({"unix": unixTime, "utc": req.time});
 })
-
+*/
 app.get('/api/:user_unix_ts',function(req,res){
   req.time = new Date(req.params.user_unix_ts * 1e3).toLocaleString();
   res.send({"unix": req.params.user_unix_ts, "utc": req.time});
