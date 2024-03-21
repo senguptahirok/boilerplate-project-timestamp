@@ -31,10 +31,33 @@ app.get('/api/:user_date',function(req,res){
   res.send({"unix": unixTime, "utc": req.time});
 })
 */
+/*
 app.get('/api/:user_unix_ts',function(req,res){
   req.time = new Date(req.params.user_unix_ts * 1e3).toLocaleString();
   res.send({"unix": req.params.user_unix_ts, "utc": req.time});
 })
+*/
+app.get('/api/:user_date',function(req,res){
+  let regex01 = /[-\d]/;
+  let regex02 = /[\d]/;
+  let userD = req.param.user_date;
+  let unixTime = ' ';
+  switch(userD){
+    case userD.match(regex01):
+      req.time = new Date(userD).toUTCString();
+      unixTime = new Date().getTime(userD);
+      res.send({'unix': unixTime, 'utc':req.time});
+      break;
+    case userD.match(regex02):
+      req.time = new Date(userD * 1e3).toLocaleString();
+      unixTime = userD;
+      res.send({'unix': unixTime, 'utc': req.time});
+      break;
+    default:
+      res.send({'error': 'Invalid Date'});
+  }
+});
+
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
