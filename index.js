@@ -42,12 +42,12 @@ app.get('/api/:user_date',function(req,res){
   let regex02 = /[\d]/;
   let userD = req.param.user_date;
   let unixTime = ' ';
-  if (userD.match(regex01)){
+  if (regex01.test(userD)){
     req.time = new Date(userD).toUTCString();
     unixTime = new Date().getTime(userD);
     res.send({'unix': unixTime, 'utc':req.time});
   }
-  else if (userD.match(regex02)){
+  else if (regex02.test(userD)){
          req.time = new Date(userD * 1e3).toLocaleString();
          res.send({'unix': userD, 'utc': req.time});
         }
