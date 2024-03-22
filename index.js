@@ -50,8 +50,7 @@ app.get('/api/:user_date',function(req,res){
       break;
     case userD.match(regex02):
       req.time = new Date(userD * 1e3).toLocaleString();
-      unixTime = userD;
-      res.send({'unix': unixTime, 'utc': req.time});
+      res.send({'unix': userD, 'utc': req.time});
       break;
     default:
       res.send({'error': 'Invalid Date'});
