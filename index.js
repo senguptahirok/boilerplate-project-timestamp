@@ -38,26 +38,23 @@ app.get('/api/:user_unix_ts',function(req,res){
 })
 */
 app.get('/api/:user_date',function(req,res){
-  let regex01 = /[(-)(/)(\d)]/;
+  let regex01 = /[-/\d]/;
   let regex02 = /[\d]/;
   let userD = req.param.user_date;
   let unixTime = ' ';
-  switch(userD){
-    case userD.match(regex01):
-      req.time = new Date(userD).toUTCString();
-      unixTime = new Date().getTime(userD);
-      res.send({'unix': unixTime, 'utc':req.time});
-      break;
-    case userD.match(regex02):
-      req.time = new Date(userD * 1e3).toLocaleString();
-      res.send({'unix': userD, 'utc': req.time});
-      break;
-    default:
-      res.send({'error': 'Invalid Date'});
+  if (userD.match(regex01)){
+    req.time = new Date(userD).toUTCString();
+    unixTime = new Date().getTime(userD);
+    res.send({'unix': unixTime, 'utc':req.time});
   }
-});
+  else if (userD.match(regex02)){
+         req.time = new Date(userD * 1e3).toLocaleString();
+         res.send({'unix': userD, 'utc': req.time});
+        }
+        else res.send({'error': 'Invalid Date'});
+  });
 
-// enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+  // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
 app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
