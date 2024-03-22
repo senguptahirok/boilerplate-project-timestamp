@@ -38,8 +38,8 @@ app.get('/api/:user_unix_ts',function(req,res){
 })
 */
 app.get('/api/:user_date',function(req,res){
-  let regex01 = /[-/\d]/;
-  let regex02 = /[\d]/;
+  let regex01 = /(\d+)[-/](\d+)/;
+  let regex02 = /(\d+)/;
   let userD = req.param.user_date;
   let unixTime = ' ';
   if (regex01.test(userD)){
