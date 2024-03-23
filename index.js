@@ -41,14 +41,16 @@ app.get('/api/:user_date',function(req,res){
   let regex01 = /\d+[-/]/g;
   let regex02 = /\d+/g;
   let userD = req.params.user_date;
+  let case_a = regex01.test(userD);
+  let case_b = regex02.test(userD);
   let unixTime = ' ';
   switch (userD){
-    case (regex01.test(userD)):
+    case case_a:
       req.time = new Date(userD).toUTCString();
       unixTime = new Date().getTime(userD);
       res.send({'unix': unixTime, 'utc':req.time});  
       break;
-    case (regex02.test(userD)):
+    case case_b:
       req.time = new Date(userD * 1e3).toLocaleString();
       res.send({'unix': userD, 'utc': req.time});
       break;
