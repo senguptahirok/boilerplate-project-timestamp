@@ -50,8 +50,8 @@ app.get('/api/:user_date',function(req,res){
     else res.send({'unix': unixTime, 'utc':req.time});
   }
   else if (regex02.test(userD)){
-         req.time = new Date(userD * 1000).toDateString();
-         res.send({'unix': userD, 'utc': req.time});
+         let utcD = new Date(userD * 1000).toDateString();
+         res.send({'unix': userD, 'utc': utcD});
         }
         else res.send({'error': 'Invalid Date'});
   });
