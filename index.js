@@ -22,7 +22,7 @@ app.get('/api',function(req,res,next){
 app.get('/api',function(req,res){
   req.time = new Date().toUTCString();
   let unixTime = new Date().getTime();
-  res.send({"unix": unixTime * 1000, "utc": req.time});
+  res.send({"unix": unixTime, "utc": req.time});
 })
 /*
 app.get('/api/:user_date',function(req,res){
