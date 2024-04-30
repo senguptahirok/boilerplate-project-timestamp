@@ -22,7 +22,7 @@ app.get('/api',function(req,res,next){
 app.get('/api',function(req,res){
   req.time = new Date().toUTCString();
   let unixTime = new Date().getTime();
-  res.send({"unix": unixTime, "utc": req.time});
+  res.json({"unix": unixTime, "utc": req.time});
 })
 /*
 app.get('/api/:user_date',function(req,res){
@@ -43,19 +43,20 @@ app.get('/api/:user_date',function(req,res){
   let userD = req.params.user_date;
   let unixTime = ' ';
   if (regex01.test(userD)){
-//    req.time = new Date(userD).toUTCString();
+    req.time = new Date(userD).toUTCString();
     unixTime = new Date(userD).getTime();
     if (req.time === 'Invalid Date')
       res.send({'error': 'Invalid Date'});
 //    else res.send({'unix': unixTime, 'utc':req.time});
-    else res.json({'unix': unixTime});
+    else res.json({'unix': unixTime, 'utc': req.time});
 
   }
   else if (regex02.test(userD)){
-         let utcD = new Date(userD * 1000).getUTCDate();
+//         let utcD = new Date(userD * 1000).getUTCDate();
+         let utcD = new Date(userD).valueOf();         
          res.send({'unix': userD, 'utc': utcD});
         }
-        else res.send({'error': 'Invalid Date'});
+        else res.json({'error': 'Invalid Date'});
   });
 
   // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
