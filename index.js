@@ -52,8 +52,8 @@ app.get('/api/:user_date',function(req,res){
 
   }
   else if (regex02.test(userD)){
-//         let utcD = new Date(userD * 1000).getUTCDate();
-         let utcD = new Date(userD * 1000).valueOf();         
+         let utcD = new Date(userD * 1000).getUTCDate();
+//         let utcD = new Date(userD * 1000).valueOf();         
          res.send({'unix': userD, 'utc': utcD});
         }
         else res.json({'error': 'Invalid Date'});
