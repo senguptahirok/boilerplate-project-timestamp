@@ -44,7 +44,7 @@ app.get('/api/:user_date',function(req,res){
   let dateInt = parseInt(userD);
   let unixTime = ' ';
   if (regex01.test(userD)){
-    req.time = new Date(dateInt).toUTCString();
+    req.time = new Date(userD).toUTCString();
     unixTime = new Date(userD).getTime();
     if (req.time === 'Invalid Date')
       res.send({'error': 'Invalid Date'});
