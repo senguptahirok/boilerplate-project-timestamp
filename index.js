@@ -52,7 +52,7 @@ app.get('/api/:user_date',function(req,res){
     else res.json({'unix': unixTime, 'utc': req.time});
 
   }
-  else if (regex02.test(userD)){
+  else if (regex02.test(userD)){ 
          let utcD = new Date(unixTime).toLocaleString();
 //         let utcD = new Date(userD * 1000).valueOf();         
          res.send({'unix': dateInt, 'utc': utcD});
