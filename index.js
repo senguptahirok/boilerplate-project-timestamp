@@ -41,10 +41,11 @@ app.get('/api/:user_date',function(req,res){
   let regex01 = /\d+[-/]/g;
   let regex02 = /\d+/g;
   let userD = req.params.user_date;
+  let dateInt = parseInt(userD);
   let unixTime = ' ';
   if (regex01.test(userD)){
-    req.time = new Date(userD).toUTCString();
-    unixTime = new Date(userD).getTime();
+    req.time = new Date(dateInt).toUTCString();
+    unixTime = new Date(dateInt).getTime();
     if (req.time === 'Invalid Date')
       res.send({'error': 'Invalid Date'});
 //    else res.send({'unix': unixTime, 'utc':req.time});
@@ -52,9 +53,9 @@ app.get('/api/:user_date',function(req,res){
 
   }
   else if (regex02.test(userD)){
-         let utcD = new Date(userD).toLocaleString();
+         let utcD = new Date(unixTime).toLocaleString();
 //         let utcD = new Date(userD * 1000).valueOf();         
-         res.send({'unix': userD, 'utc': utcD});
+         res.send({'unix': dateInt, 'utc': utcD});
         }
         else res.json({'error': 'Invalid Date'});
   });
