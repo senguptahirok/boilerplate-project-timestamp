@@ -47,7 +47,7 @@ app.get('/api/:user_date',function(req,res){
     req.time = new Date(userD).toUTCString();
     unixTime = new Date(userD).getTime();
     if (req.time === 'Invalid Date')
-      res.send({'error': 'Invalid Date'});
+      res.json({'error': 'Invalid Date'});
 //    else res.send({'unix': unixTime, 'utc':req.time});
     else res.json({'unix': unixTime, 'utc': req.time});
 
@@ -56,7 +56,7 @@ app.get('/api/:user_date',function(req,res){
 //         let utcD = new Date(dateInt).toLocaleString();
          let utcD = new Date(dateInt).toUTCString();         
 //         let utcD = new Date(userD * 1000).valueOf();         
-         res.send({'unix': dateInt, 'utc': utcD});
+         res.json({'unix': dateInt, 'utc': utcD});
         }
         else res.json({'error': 'Invalid Date'});
   });
