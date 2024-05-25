@@ -25,9 +25,9 @@ app.get('/api',function(req,res){
   res.json({"unix": unixTime, "utc": req.time});
 })
 /*
-app.get('/api/:user_date',function(req,res){
-  req.time = new Date(req.params.user_date).toUTCString();
-  let unixTime = new Date().getTime(req.param.user_date);
+app.get('/api/:date',function(req,res){
+  req.time = new Date(req.params.date).toUTCString();
+  let unixTime = new Date().getTime(req.param.date);
   res.send({"unix": unixTime, "utc": req.time});
 })
 */
@@ -37,11 +37,11 @@ app.get('/api/:user_unix_ts',function(req,res){
   res.send({"unix": req.params.user_unix_ts, "utc": req.time});
 })
 */
-app.get('/api/:user_date',function(req,res){
+app.get('/api/:date',function(req,res){
   let regex01 = /\d+[-/]/g;
 //  let regex02 = /\d+/g;
   let regex02 = /\d{5,}/g;
-  let userD = req.params.user_date;
+  let userD = req.params.date;
   let dateInt = parseInt(userD);
   let unixTime = ' ';
   if (regex01.test(userD)){
