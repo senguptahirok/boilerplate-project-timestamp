@@ -37,7 +37,7 @@ app.get('/api/:user_unix_ts',function(req,res){
   res.send({"unix": req.params.user_unix_ts, "utc": req.time});
 })
 */
-app.get('/api/:date',function(req,res){
+app.get('/api/:date?',function(req,res){
   let regex01 = /\d+[-/]/g;
 //  let regex02 = /\d+/g;
   let regex02 = /\d{5,}/g;
