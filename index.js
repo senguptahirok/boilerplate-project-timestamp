@@ -39,7 +39,8 @@ app.get('/api/:user_unix_ts',function(req,res){
 */
 app.get('/api/:user_date',function(req,res){
   let regex01 = /\d+[-/]/g;
-  let regex02 = /\d+/g;
+//  let regex02 = /\d+/g;
+  let regex02 = /\d{5,}/g;
   let userD = req.params.user_date;
   let dateInt = parseInt(userD);
   let unixTime = ' ';
