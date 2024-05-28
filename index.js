@@ -20,9 +20,10 @@ app.get('/api',function(req,res,next){
   });
 */
 app.get('/api',function(req,res){
-  req.time = new Date().toUTCString();
+//  req.time = new Date().toUTCString();
   let unixTime = new Date().getTime();
-  res.json({"unix": unixTime, "utc": req.time});
+  let utcTime = new Date().toUTCString();
+  return res.json({"unix": unixTime, "utc": utcTime});
 })
 /*
 app.get('/api/:date',function(req,res){
@@ -38,28 +39,42 @@ app.get('/api/:user_unix_ts',function(req,res){
 })
 */
 app.get('/api/:date?',function(req,res){
-  let regex01 = /\d+[-/]/g;
+//  let regex01 = /\d+[-/]/g;
 //  let regex02 = /\d+/g;
-  let regex02 = /\d{5,}/g;
+//  let regex02 = /\d{5,}/g;
   let userD = req.params.date;
-  let dateInt = parseInt(userD);
-  let unixTime = ' ';
-  if (regex01.test(userD)){
-    req.time = new Date(userD).toUTCString();
-    unixTime = new Date(userD).getTime();
-    if (req.time === 'Invalid Date')
-      res.json({'error': 'Invalid Date'});
-//    else res.send({'unix': unixTime, 'utc':req.time});
-    else res.json({'unix': unixTime, 'utc': req.time});
+  if (!isNaN(Number(userD))){
+    let unix01 = new Date(Number(userD)).getTime();
+    let utc01 = new Date(Number(userD)).toUTCString();
+    return res.json({"unix": unix01,"utc": utc01});
+  };
 
-  }
-  else if (regex02.test(userD)){ 
+  let unix02 = new Date(userD).getTime();
+  if (isNaN(unix02))
+    return res.json({error: "Invalid date"});
+
+//  let utc02 = new Date(Date.parse(userD)).toUTCString();
+  let utc02 = new Date(userD).toUTCString();
+  return res.json({"unix": unix02, "utc": utc02});
+
+//  let dateInt = parseInt(userD);
+//  let unixTime = ' ';
+//  if (regex01.test(userD)){
+//    req.time = new Date(userD).toUTCString();
+//    unixTime = new Date(userD).getTime();
+//    if (req.time === 'Invalid Date')
+//      res.json({'error': 'Invalid Date'});
+//    else res.send({'unix': unixTime, 'utc':req.time});
+//    else res.json({'unix': unixTime, 'utc': req.time});
+
+//  }
+//  else if (regex02.test(userD)){ 
 //         let utcD = new Date(dateInt).toLocaleString();
-         let utcD = new Date(dateInt).toUTCString();         
+//         let utcD = new Date(dateInt).toUTCString();         
 //         let utcD = new Date(userD * 1000).valueOf();         
-         res.json({'unix': dateInt, 'utc': utcD});
-        }
-        else res.json({'error': 'Invalid Date'});
+//         res.json({'unix': dateInt, 'utc': utcD});
+//        }
+//        else res.json({'error': 'Invalid Date'});
   });
 
   // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
